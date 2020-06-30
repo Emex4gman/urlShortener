@@ -20,7 +20,7 @@ exports.findOneShortUrl = async (req, res) => {
     return res.redirect(errorUrl);
   }
 }
-exports.findOneShortUrl2 = async (req, res) => {
+exports.findOneShortUrlV2 = async (req, res) => {
   //(/:code)
   const urlCode = req.params.code;
   const item = await UrlShorten.findOne({ urlCode: urlCode });
