@@ -6,7 +6,6 @@ const mongoose = require("mongoose");
 const mongoURI = process.env.DATABASEURL;
 const connectOptions = {
   keepAlive: true,
-  reconnectTries: Number.MAX_VALUE,
   useUnifiedTopology: true,
   useNewUrlParser: true
 };
