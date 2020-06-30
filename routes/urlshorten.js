@@ -3,60 +3,9 @@ const validUrl = require("valid-url");
 const UrlShorten = mongoose.model("UrlShorten");
 const shortid = require("shortid");
 const errorUrl = 'http://localhost/error';
-
+const contollers = require('../controller/urlshorten.controller')
 module.exports = app => {
-    app.get('/', (req, res) => {
-        var originalUrl;
-        const item = UrlShorten.findOne({ originalUrl: originalUrl });
-        res.render('landing',{items:item});
-    })
-
-    app.get("/api/item/:code", async (req, res) => {
-        const urlCode = req.params.code;
-        const item = await UrlShorten.findOne({ urlCode: urlCode });
-        if (item) {
-            return res.redirect(item.originalUrl);
-        } else {
-            return res.redirect(errorUrl);
-        }
-    });
-
-    // app.post('/api/item', (req, res) => {
-    //     const { originalUrl, shortBaseUrl } = req.body;
-    //     console.log(req.body);
-    //     res.send(originalUrl);
-    // })
-    app.post("/api/item", async (req, res) => {
-        const { originalUrl } = req.body;
-        const shortBaseUrl = "http://ibeFx";
-        if (validUrl.isUri(shortBaseUrl)) {
-        } else {
-            return res
-                .status(401).json("Invalid Base Url");
-        }
-        const urlCode = shortid.generate();
-        const updatedAt = new Date();
-        if (validUrl.isUri(originalUrl)) {
-            try {
-                const item = await UrlShorten.findOne({ originalUrl: originalUrl });
-                if (item) {
-                    res.status(200).render('results', { items: item });
-                } else {
-                    shortUrl = shortBaseUrl + "." + urlCode;
-                    const item = new UrlShorten({
-                        originalUrl,
-                        shortUrl,
-                        urlCode,
-                        updatedAt
-                    });
-                    await item.save();
-                    res.status(200).render('results',{items:item});
-                }
-            } catch (err) {
-                res.status(401).json("Invalid User Id");
-            }
-        } else {
-            return res.status(401).json("Invalid Original Url");
-        }
-    });
+  app.get('/', contollers.getHome)
+  app.get("/api/item/:code", contollers.findOneShortUrl);
+  app.post("/api/item", contollers.createShortUrl);
 };

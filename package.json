@@ -3,6 +3,10 @@
   "version": "1.0.0",
   "description": "An emex url shortner",
   "main": "index.js",
+  "engines": {
+    "node": ">=8",
+    "npm": "*"
+  },
   "scripts": {
     "test": "echo \"test completed\"",
     "start": " node index.js ",
