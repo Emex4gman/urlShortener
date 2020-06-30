@@ -23,11 +23,7 @@ exports.findOneShortUrl = async (req, res) => {
 exports.createShortUrl = async (req, res) => {
   const { originalUrl } = req.body;
   const shortBaseUrl = "http://ibeFx";
-  if (validUrl.isUri(shortBaseUrl)) {
-  } else {
-    return res
-      .status(401).json("Invalid Base Url");
-  }
+
   const urlCode = shortid.generate();
   const updatedAt = new Date();
   if (validUrl.isUri(originalUrl)) {
