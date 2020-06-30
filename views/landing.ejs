@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>SHORTEN URL</title>
+</head>
+<body>
+
+    <form action="/api/item" method="POST">
+<input type="text" name="originalUrl" placeholder="Your url" required>
+<!-- <input type="text" name="shortBaseUrl" placeholder="Your url" value="http://emex"> -->
+
+<br>
+<br>
+<button type="submit">SUBMIT</button>
+    </form>
+   
+        <% if(items.urlCode) { %>
+            <h1>here is ur link</h1>
+            <a href="/api/item/<%= items.urlCode %>"> here</a>
+        <% } %>
+    
+</body>
+</html>
